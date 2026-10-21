@@ -1,0 +1,532 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07101f">
+<meta name="description" content="Stock market education, options trading concepts, swing trading and risk management.">
+<title>Kyra Singhal | Stock Market Education</title>
+
+<style>
+:root {
+  --bg: #07101f;
+  --panel: #101d35;
+  --blue: #4388ff;
+  --green: #13c99a;
+  --text: #f7faff;
+  --muted: #a9b7cd;
+  --border: #203455;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: radial-gradient(ellipse at top, #172c51, #07101f 55%, #050b16);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* Market ticker: illustrative demo data */
+.ticker {
+  display: flex;
+  gap: 28px;
+  overflow: hidden;
+  white-space: nowrap;
+  background: #050b16;
+  padding: 14px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.up { color: #31d89a; }
+.down { color: #ff737d; }
+
+.demo {
+  color: #8495b1;
+  font-size: 10px;
+}
+
+.container {
+  width: min(100% - 28px, 780px);
+  margin: auto;
+}
+
+/* Profile section */
+.hero {
+  text-align: center;
+  padding: 36px 0 28px;
+}
+
+.profile {
+  width: 130px;
+  height: 130px;
+  border: 4px solid var(--blue);
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 35%;
+  box-shadow: 0 0 0 7px #4388ff16;
+}
+
+.name {
+  font-size: clamp(29px, 6vw, 40px);
+  margin: 22px 0 10px;
+  font-weight: 850;
+  letter-spacing: -1px;
+}
+
+.verified {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #2396ff;
+  font-size: 15px;
+  vertical-align: middle;
+}
+
+.badge {
+  display: inline-block;
+  background: #142e55;
+  border: 1px solid #31568c;
+  border-radius: 30px;
+  padding: 8px 15px;
+  color: #a9d0ff;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.intro {
+  color: var(--muted);
+  line-height: 1.7;
+  margin: 16px auto 22px;
+  max-width: 560px;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.metric {
+  background: #ffffff08;
+  border: 1px solid #ffffff12;
+  border-radius: 15px;
+  padding: 16px 6px;
+}
+
+.metric strong {
+  display: block;
+  color: #65a2ff;
+  font-size: clamp(16px, 3.8vw, 22px);
+}
+
+.metric span {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 7px;
+}
+
+.note {
+  color: #8393ad;
+  font-size: 11px;
+  line-height: 1.6;
+  margin-top: 12px;
+}
+
+/* Education cards */
+.services {
+  display: grid;
+  gap: 14px;
+  margin: 18px 0;
+}
+
+.card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: linear-gradient(135deg, #101d35, #0c172b);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 20px;
+  transition: transform .25s, border-color .25s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: var(--blue);
+}
+
+.icon {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  background: #1a3158;
+  border: 1px solid #31558b;
+  border-radius: 15px;
+  font-size: 27px;
+}
+
+.card:nth-child(2) .icon {
+  background: #10363c;
+  border-color: #1a6461;
+}
+
+.card:nth-child(3) .icon {
+  background: #28214e;
+  border-color: #51418b;
+}
+
+.card h2 {
+  font-size: 19px;
+  margin: 2px 0 8px;
+}
+
+.card p {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* Join button */
+.cta-section {
+  text-align: center;
+  padding: 16px 0 28px;
+}
+
+.cta {
+  display: block;
+  text-decoration: none;
+  color: white;
+  font-weight: 800;
+  font-size: clamp(15px, 4vw, 20px);
+  padding: 18px 12px;
+  border-radius: 18px;
+  background: linear-gradient(105deg, #3986ff, #10bd91);
+  box-shadow: 0 12px 30px #168cc94a;
+  transition: transform .2s, filter .2s;
+}
+
+.cta:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.sub {
+  color: #8798b3;
+  font-size: 12px;
+  line-height: 1.6;
+  margin-top: 11px;
+}
+
+/* Disclaimer */
+.disclaimer {
+  margin: 8px 0 26px;
+  padding: 17px;
+  background: #ffffff08;
+  border: 1px solid #ffffff12;
+  border-radius: 16px;
+  color: #93a3bc;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.disclaimer strong {
+  color: #ffcf62;
+}
+
+.footer {
+  text-align: center;
+  color: #74849f;
+  font-size: 12px;
+  padding: 10px 0 30px;
+}
+
+/* Notification pop-up */
+.toast {
+  position: fixed;
+  z-index: 10;
+  left: 16px;
+  bottom: 20px;
+  max-width: calc(100% - 32px);
+  background: #12233d;
+  border: 1px solid #2a466d;
+  border-radius: 14px;
+  padding: 13px 16px;
+  box-shadow: 0 10px 35px #0008;
+  color: white;
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: opacity .35s, transform .35s;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.toast small {
+  display: block;
+  color: #9eb0ca;
+  margin-top: 4px;
+}
+
+@media (max-width: 460px) {
+  .metrics {
+    gap: 6px;
+  }
+
+  .metric {
+    padding: 13px 3px;
+  }
+
+  .metric span {
+    font-size: 10px;
+  }
+
+  .card {
+    padding: 16px;
+    gap: 13px;
+  }
+
+  .icon {
+    width: 49px;
+    height: 49px;
+    font-size: 24px;
+  }
+
+  .hero {
+    padding-top: 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- MARKET TICKER: DEMO DATA, NOT LIVE -->
+<div class="ticker" aria-label="Illustrative stock market ticker">
+  <span>NIFTY 50 <b class="up">▲ 22,450 +0.42%</b></span>
+  <span>BANK NIFTY <b class="up">▲ 48,120 +0.31%</b></span>
+  <span>RELIANCE <b class="up">▲ 1,290 +0.25%</b></span>
+  <span>TCS <b class="down">▼ 3,720 -0.18%</b></span>
+  <span class="demo">DEMO DATA · NOT LIVE</span>
+</div>
+
+<main class="container">
+
+  <!-- PROFILE -->
+  <header class="hero">
+
+    <!-- Put profile.jpg beside index.html -->
+    <img
+      class="profile"
+      src="profile.jpg"
+      alt="Kyra Singhal profile photo"
+      onerror="this.style.display='none'"
+    >
+
+    <h1 class="name">
+      Kyra Singhal
+      <span class="verified" aria-label="profile accent">✓</span>
+    </h1>
+
+    <div class="badge">📊 Stock Market Education</div>
+
+    <p class="intro">
+      Learn about options, swing-trading concepts, chart patterns
+      and risk management with easy-to-understand market education.
+    </p>
+
+    <!-- Use only verified personal or business figures -->
+    <div class="metrics">
+      <div class="metric">
+        <strong>Learn</strong>
+        <span>Step by step</span>
+      </div>
+
+      <div class="metric">
+        <strong>5+ yrs*</strong>
+        <span>Experience</span>
+      </div>
+
+      <div class="metric">
+        <strong>Community</strong>
+        <span>Learn together</span>
+      </div>
+
+      <div class="metric">
+        <strong>Regular</strong>
+        <span>Market lessons</span>
+      </div>
+    </div>
+
+    <p class="note">
+      *Verify experience and audience claims before publishing.
+    </p>
+
+  </header>
+
+  <!-- EDUCATIONAL TOPICS -->
+  <section class="services" aria-label="Educational topics">
+
+    <article class="card">
+      <div class="icon" aria-hidden="true">📈</div>
+      <div>
+        <h2>Options Trading Education</h2>
+        <p>
+          Understand Nifty and Bank Nifty options, order types,
+          entry planning and stop-loss concepts. Educational content
+          only—not guaranteed trade signals.
+        </p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="icon" aria-hidden="true">💡</div>
+      <div>
+        <h2>Swing Trade Concepts</h2>
+        <p>
+          Explore watchlist research, technical-analysis basics,
+          support and resistance, and risk management before
+          making trading decisions.
+        </p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="icon" aria-hidden="true">🎓</div>
+      <div>
+        <h2>Stock Market Learning</h2>
+        <p>
+          Learn chart patterns, market terminology, trading
+          psychology and responsible risk management,
+          from beginner level onward.
+        </p>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- TELEGRAM CTA -->
+  <section class="cta-section">
+
+    <!-- Replace this URL with your actual Telegram invite link -->
+    <a
+      class="cta"
+      id="joinButton"
+      href="https://t.me/"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      📲 Join Kyra Singhal — Free Channel
+    </a>
+
+    <p class="sub">
+      🔒 Check channel details before joining · No profit guarantees
+    </p>
+
+  </section>
+
+  <!-- RISK DISCLAIMER -->
+  <aside class="disclaimer">
+    <strong>⚠️ Important Disclaimer:</strong>
+    This page is for educational purposes only and is not investment
+    advice or a recommendation to buy or sell securities. Trading,
+    especially derivatives, involves substantial risk and may result
+    in losses. Past performance does not guarantee future results.
+    Verify the educator's identity, credentials, claims and channel
+    link independently. The ticker values above are illustrative
+    demo data, not live market prices.
+  </aside>
+
+  <footer class="footer">
+    © <span id="year"></span> Kyra Singhal · Stock Market Education
+  </footer>
+
+</main>
+
+<!-- INTERACTIVE POP-UP -->
+<div class="toast" id="toast" role="status" aria-live="polite">
+  👋 Welcome!
+  <small>Explore the educational topics above.</small>
+</div>
+
+<script>
+/* Automatically update copyright year */
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+
+/*
+  IMPORTANT:
+  Replace the URL below with your real Telegram invite link.
+  Example format: https://t.me/+YOUR_INVITE_CODE
+*/
+const telegramLink = "https://t.me/";
+
+document.getElementById("joinButton").href = telegramLink;
+
+/* Rotating informational pop-ups */
+const toast = document.getElementById("toast");
+
+const messages = [
+  ["👋 Welcome!", "Explore the educational topics above."],
+  ["📚 Learning first", "Understand the risks before trading."],
+  ["🔎 Verify before joining", "Check the channel owner independently."]
+];
+
+let messageIndex = 0;
+let toastTimer;
+
+function showToast() {
+  toast.innerHTML =
+    messages[messageIndex][0] +
+    "<small>" + messages[messageIndex][1] + "</small>";
+
+  toast.classList.add("show");
+
+  clearTimeout(toastTimer);
+
+  toastTimer = setTimeout(function () {
+    toast.classList.remove("show");
+  }, 3500);
+
+  messageIndex = (messageIndex + 1) % messages.length;
+}
+
+/* Show first pop-up after page load */
+window.addEventListener("load", function () {
+  setTimeout(showToast, 1800);
+});
+
+/* Repeat informational pop-ups */
+setInterval(showToast, 12000);
+</script>
+
+</body>
+</html>
